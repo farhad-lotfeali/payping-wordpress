@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline">تنظیمت افزونه PayPing</h1>
+    <h1 class="wp-heading-inline">تنظیمات افزونه PayPing</h1>
     <form method="post" action="options.php">
         <?php settings_fields( 'payping' ); ?>
         <?php do_settings_sections( 'payping' ); ?>
