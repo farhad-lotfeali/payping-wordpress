@@ -1,6 +1,6 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">مغایرت گیری  تراکنش ها</h1>
-    <?php do_action('admin_notices'); ?>
+    <?php do_action('admin_notices_pp'); ?>
     <table class="wp-list-table widefat fixed striped" cellspacing="0">
 		<thead>
 			<tr>
@@ -21,7 +21,7 @@
             <?php else: ?>
             <?php foreach($res->body as $item): ?>
                 <tr class='clickable-row' data-href='<?= admin_url('admin.php?page=payping&ac=resolve&') ?>'>
-                    <td style="text-align:center"><strong dir="ltr"><?= jdate('Y-m-d H:i',strtotime($item->payDate)) ?></strong></td>
+                    <td style="text-align:center"><strong dir="ltr"><?= pp_jdate('Y-m-d H:i',strtotime($item->payDate)) ?></strong></td>
                     <td style="text-align:center"><span><?= $item->refId ?></span></td>
                     <td style="text-align:center"><span><?= $item->clientRefId ?></span></td>
                     <td style="text-align:center"><span><?= number_format($item->amount) ?> تومان</span></td>

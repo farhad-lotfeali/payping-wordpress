@@ -71,7 +71,7 @@ function Load_payping_Gateway()
 				$this->title = $this->settings['title'];
 				$this->description = $this->settings['description'];
 
-				$this->paypingToken = $this->settings['paypingToken'];
+				$this->paypingToken = get_option('pp_token');
 
 				$this->success_massage = $this->settings['success_massage'];
 				$this->failed_massage = $this->settings['failed_massage'];
@@ -125,18 +125,8 @@ function Load_payping_Gateway()
 							'description' => __('توضیحاتی که در طی عملیات پرداخت برای درگاه نمایش داده خواهد شد', 'woocommerce'),
 							'default' => __('پرداخت به وسیله کلیه کارت های عضو شتاب از طریق درگاه پی‌پینگ', 'woocommerce')
 						),
-						'account_confing' => array(
-							'title' => __('تنظیمات حساب پی‌پینگ', 'woocommerce'),
-							'type' => 'title',
-							'description' => '',
-						),
-						'paypingToken' => array(
-							'title' => __('توکن', 'woocommerce'),
-							'type' => 'text',
-							'description' => __('توکن درگاه پی‌پینگ', 'woocommerce'),
-							'default' => '',
-							'desc_tip' => true
-						),
+						
+					
 						'payment_confing' => array(
 							'title' => __('تنظیمات عملیات پرداخت', 'woocommerce'),
 							'type' => 'title',

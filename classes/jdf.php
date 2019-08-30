@@ -9,16 +9,16 @@
  */
 
 /*	F	*/
-if (!function_exists('jdate')) {
-    function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
+if (!function_exists('pp_jdate')) {
+    function pp_jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
     {
 
         $T_sec = 0;/* <= رفع خطاي زمان سرور ، با اعداد '+' و '-' بر حسب ثانيه */
 
         if ($time_zone != 'local') date_default_timezone_set(($time_zone === '') ? 'Asia/Tehran' : $time_zone);
-        $ts = $T_sec + (($timestamp === '') ? time() : tr_num($timestamp));
+        $ts = $T_sec + (($timestamp === '') ? time() : pp_tr_num($timestamp));
         $date = explode('_', date('H_i_j_n_O_P_s_w_Y', $ts));
-        list($j_y, $j_m, $j_d) = gregorian_to_jalali($date[8], $date[3], $date[2]);
+        list($j_y, $j_m, $j_d) = pp_gregorian_to_jalali($date[8], $date[3], $date[2]);
         $doy = ($j_m < 7) ? (($j_m - 1) * 31) + $j_d - 1 : (($j_m - 7) * 30) + $j_d + 185;
         $kab = (((($j_y % 33) % 4) - 1) == ((int)(($j_y % 33) * 0.05))) ? 1 : 0;
         $sl = strlen($format);
@@ -223,20 +223,20 @@ if (!function_exists('jdate')) {
                     $out .= $sub;
             }
         }
-        return ($tr_num != 'en') ? tr_num($out, 'fa', '.') : $out;
+        return ($tr_num != 'en') ? pp_tr_num($out, 'fa', '.') : $out;
     }
 }
 /*	F	*/
-if (!function_exists('jdate')) {
-    function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
+if (!function_exists('pp_jstrftime')) {
+    function pp_jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
     {
 
         $T_sec = 0;/* <= رفع خطاي زمان سرور ، با اعداد '+' و '-' بر حسب ثانيه */
 
         if ($time_zone != 'local') date_default_timezone_set(($time_zone === '') ? 'Asia/Tehran' : $time_zone);
-        $ts = $T_sec + (($timestamp === '') ? time() : tr_num($timestamp));
+        $ts = $T_sec + (($timestamp === '') ? time() : pp_tr_num($timestamp));
         $date = explode('_', date('h_H_i_j_n_s_w_Y', $ts));
-        list($j_y, $j_m, $j_d) = gregorian_to_jalali($date[7], $date[4], $date[3]);
+        list($j_y, $j_m, $j_d) = pp_gregorian_to_jalali($date[7], $date[4], $date[3]);
         $doy = ($j_m < 7) ? (($j_m - 1) * 31) + $j_d - 1 : (($j_m - 7) * 30) + $j_d + 185;
         $kab = (((($j_y % 33) % 4) - 1) == ((int)(($j_y % 33) * 0.05))) ? 1 : 0;
         $sl = strlen($format);
@@ -443,18 +443,18 @@ if (!function_exists('jdate')) {
                     $out .= $sub;
             }
         }
-        return ($tr_num != 'en') ? tr_num($out, 'fa', '.') : $out;
+        return ($tr_num != 'en') ? pp_tr_num($out, 'fa', '.') : $out;
     }
 }
 /*	F	*/
-if (!function_exists('jmktime')) {
-    function jmktime($h = '', $m = '', $s = '', $jm = '', $jd = '', $jy = '', $none = '', $timezone = 'Asia/Tehran')
+if (!function_exists('pp_jmktime')) {
+    function pp_jmktime($h = '', $m = '', $s = '', $jm = '', $jd = '', $jy = '', $none = '', $timezone = 'Asia/Tehran')
     {
         if ($timezone != 'local') date_default_timezone_set($timezone);
         if ($h === '') {
             return time();
         } else {
-            list($h, $m, $s, $jm, $jd, $jy) = explode('_', tr_num($h . '_' . $m . '_' . $s . '_' . $jm . '_' . $jd . '_' . $jy));
+            list($h, $m, $s, $jm, $jd, $jy) = explode('_', pp_tr_num($h . '_' . $m . '_' . $s . '_' . $jm . '_' . $jd . '_' . $jy));
             if ($m === '') {
                 return mktime($h);
             } else {
@@ -484,14 +484,14 @@ if (!function_exists('jmktime')) {
     }
 }
 /*	F	*/
-if (!function_exists('jgetdate')) {
-    function jgetdate($timestamp = '', $none = '', $timezone = 'Asia/Tehran', $tn = 'en')
+if (!function_exists('pp_jgetdate')) {
+    function pp_jgetdate($timestamp = '', $none = '', $timezone = 'Asia/Tehran', $tn = 'en')
     {
-        $ts = ($timestamp === '') ? time() : tr_num($timestamp);
+        $ts = ($timestamp === '') ? time() : pp_tr_num($timestamp);
         $jdate = explode('_', jdate('F_G_i_j_l_n_s_w_Y_z', $ts, '', $timezone, $tn));
         return array(
-            'seconds' => tr_num((int)tr_num($jdate[6]), $tn),
-            'minutes' => tr_num((int)tr_num($jdate[2]), $tn),
+            'seconds' => tr_num((int)pp_tr_num($jdate[6]), $tn),
+            'minutes' => tr_num((int)pp_tr_num($jdate[2]), $tn),
             'hours' => $jdate[1],
             'mday' => $jdate[3],
             'wday' => $jdate[7],
@@ -500,22 +500,22 @@ if (!function_exists('jgetdate')) {
             'yday' => $jdate[9],
             'weekday' => $jdate[4],
             'month' => $jdate[0],
-            0 => tr_num($ts, $tn)
+            0 => pp_tr_num($ts, $tn)
         );
     }
 }
 /*	F	*/
-if (!function_exists('jcheckdate')) {
-    function jcheckdate($jm, $jd, $jy)
+if (!function_exists('pp_jcheckdate')) {
+    function pp_jcheckdate($jm, $jd, $jy)
     {
-        list($jm, $jd, $jy) = explode('_', tr_num($jm . '_' . $jd . '_' . $jy));
+        list($jm, $jd, $jy) = explode('_', pp_tr_num($jm . '_' . $jd . '_' . $jy));
         $l_d = ($jm == 12) ? ((((($jy % 33) % 4) - 1) == ((int)(($jy % 33) * 0.05))) ? 30 : 29) : 31 - (int)($jm / 6.5);
         return ($jm > 12 or $jd > $l_d or $jm < 1 or $jd < 1 or $jy < 1) ? false : true;
     }
 }
 /*	F	*/
-if (!function_exists('tr_num')) {
-    function tr_num($str, $mod = 'en', $mf = '٫')
+if (!function_exists('pp_tr_num')) {
+    function pp_tr_num($str, $mod = 'en', $mf = '٫')
     {
         $num_a = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
         $key_a = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', $mf);
@@ -523,11 +523,11 @@ if (!function_exists('tr_num')) {
     }
 }
 /*	F	*/
-if (!function_exists('jdate_words')) {
-    function jdate_words($array, $mod = '')
+if (!function_exists('pp_jdate_words')) {
+    function pp_jdate_words($array, $mod = '')
     {
         foreach ($array as $type => $num) {
-            $num = (int)tr_num($num);
+            $num = (int)pp_tr_num($num);
             switch ($type) {
 
                 case'ss':
@@ -609,10 +609,10 @@ if (!function_exists('jdate_words')) {
  * 12053 = 365*33 + 32/4    &    36524 = 365*100 + 100/4 - 100/100   */
 
 /*	F	*/
-if (!function_exists('gregorian_to_jalali')) {
-    function gregorian_to_jalali($gy, $gm, $gd, $mod = '')
+if (!function_exists('pp_gregorian_to_jalali')) {
+    function pp_gregorian_to_jalali($gy, $gm, $gd, $mod = '')
     {
-        list($gy, $gm, $gd) = explode('_', tr_num($gy . '_' . $gm . '_' . $gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+        list($gy, $gm, $gd) = explode('_', pp_tr_num($gy . '_' . $gm . '_' . $gd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
         $g_d_m = array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334);
         if ($gy > 1600) {
             $jy = 979;
@@ -640,10 +640,10 @@ if (!function_exists('gregorian_to_jalali')) {
     }
 }
 /*	F	*/
-if (!function_exists('jalali_to_gregorian')) {
-    function jalali_to_gregorian($jy, $jm, $jd, $mod = '')
+if (!function_exists('pp_jalali_to_gregorian')) {
+    function pp_jalali_to_gregorian($jy, $jm, $jd, $mod = '')
     {
-        list($jy, $jm, $jd) = explode('_', tr_num($jy . '_' . $jm . '_' . $jd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+        list($jy, $jm, $jd) = explode('_', pp_tr_num($jy . '_' . $jm . '_' . $jd));/* <= Extra :اين سطر ، جزء تابع اصلي نيست */
         if ($jy > 979) {
             $gy = 1600;
             $jy -= 979;
@@ -671,8 +671,8 @@ if (!function_exists('jalali_to_gregorian')) {
     }
 }
 
-if (!function_exists('convert')) {
-    function convert($string)
+if (!function_exists('pp_convert')) {
+    function pp_convert($string)
     {
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١', '٠'];

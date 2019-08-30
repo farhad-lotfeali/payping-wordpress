@@ -1,6 +1,6 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">تراکنش های انجام شده توسط PayPing</h1>
-    <?php do_action('admin_notices'); ?>
+    <?php do_action('admin_notices_pp'); ?>
     <div class="media-toolbar wp-filter" style="padding: 10px">
         <form id="hash_form">
             <input type="hidden" name="page" value="payping">
@@ -35,7 +35,7 @@
             <?php else: ?>
             <?php foreach($res->body as $item): ?>
                 <tr class='clickable-row' data-href='<?= admin_url('admin.php?page=payping&ac=detail&code='.$item->code) ?>'>
-                    <td style="text-align:center"><strong dir="ltr"><?= jdate('Y-m-d H:i',strtotime($item->payDate)) ?></strong></td>
+                    <td style="text-align:center"><strong dir="ltr"><?= pp_jdate('Y-m-d H:i',strtotime($item->payDate)) ?></strong></td>
                     <td style="text-align:center"><span><?= $item->code ?></span></td>
                     <td style="text-align:center"><span><?= empty($item->name)?'-':$item->name ?></span></td>
                     <td style="text-align:center"><?= boolval($item->isPaid)?'<span style="color:green">پرداخت شده</span>':'<span style="color:red">پرداخت نشده</span>' ?></td>

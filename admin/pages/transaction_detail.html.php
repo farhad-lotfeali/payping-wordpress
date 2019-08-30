@@ -1,6 +1,6 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">جزییات تراکنش</h1>
-    <?php do_action('admin_notices'); ?>
+    <?php do_action('admin_notices_pp'); ?>
     <div class="card">
         <h3>لینک پرداخت تراکنش : <a target="_blank" href="https://ppng.ir/p/<?= $_GET['code'] ?>" >https://ppng.ir/p/<?= $_GET['code'] ?></a></h3>
     </div>
@@ -12,10 +12,10 @@
                 <td style="border: 1px solid #c9c9c9; text-align:center"><?= $_GET['code'] ?></td>
 
                 <th style="border: 1px solid #c9c9c9; font-weight: bold; text-align: reight;">تاریخ درخواست</th>
-                <td style="border: 1px solid #c9c9c9; text-align:center" ><strong dir="ltr"><?= jdate('Y-m-d H:i',strtotime($transaction->reqDate)) ?></strong></td>
+                <td style="border: 1px solid #c9c9c9; text-align:center" ><strong dir="ltr"><?= pp_jdate('Y-m-d H:i',strtotime($transaction->reqDate)) ?></strong></td>
                 
                 <th style="border: 1px solid #c9c9c9; font-weight: bold; text-align: reight;">تاریخ پرداخت</th>
-                <td style="border: 1px solid #c9c9c9; text-align:center" ><strong dir="ltr"><?= jdate('Y-m-d H:i',strtotime($transaction->payDate)) ?></strong></td>
+                <td style="border: 1px solid #c9c9c9; text-align:center" ><strong dir="ltr"><?= pp_jdate('Y-m-d H:i',strtotime($transaction->payDate)) ?></strong></td>
                 
                 <th style="border: 1px solid #c9c9c9; font-weight: bold; text-align: reight;">نام پرداخت کننده</th>
                 <td style="border: 1px solid #c9c9c9; text-align:center"><?= $transaction->name ?></td>

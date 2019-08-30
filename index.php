@@ -14,4 +14,4 @@ if (!function_exists('jdate')) require_once(dirname(__FILE__) . "/classes/jdf.ph
 require_once(dirname(__FILE__) . "/classes/paginator.class.php");
 require_once(dirname(__FILE__) . "/functions.php");
 require_once(dirname(__FILE__) . "/admin/index.php");
-require_once(dirname(__FILE__) . "/gateways/woocommerce/index.php");
+require_once(dirname(__FILE__) . "/gateways/woocommerce.php");
