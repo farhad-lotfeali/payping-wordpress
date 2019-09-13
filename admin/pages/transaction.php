@@ -1,6 +1,9 @@
 <?php
 function pp_admin_main(){
+    $api = new pp_Api();
+    pp_dump($api->ipgs());
 
+    
     if(isset($_GET['ac'])){
         $action = $_GET['ac'];
     }else{
@@ -52,6 +55,7 @@ function pp_transaction_detail()
 {
     $api = new pp_Api();
     $transaction = $api->transaction($_GET['code'])->body;
+    $status_history = $api->status_history($_GET['code'])->body;
     require dirname(__FILE__). '/transaction_detail.html.php';
 }
 

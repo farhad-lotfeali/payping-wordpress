@@ -4,25 +4,11 @@ if (!defined('ABSPATH'))
 
 function Load_payping_Gateway()
 {
-
 	if (class_exists('WC_Payment_Gateway') && !class_exists('WC_PPal') && !function_exists('Woocommerce_Add_payping_Gateway')) {
-        
-        /* Show Debug In Console */
-        function WC_GPP_Debug_Log($Debug_Mode='no', $object=null, $label=null )
-        {
-            if($Debug_Mode === 'yes'){
-                $object = $object; 
-                $message = json_encode( $object, JSON_UNESCAPED_UNICODE);
-                $label = "Debug".($label ? " ($label): " : ': '); 
-                echo "<script>console.log(\"$label\", $message);</script>";
-
-                file_put_contents(WC_GPPDIR.'/log_payping.txt', $label."\n".$message."\n\n", FILE_APPEND);
-            }
-        }
-
+		
 		add_filter('woocommerce_payment_gateways', 'Woocommerce_Add_payping_Gateway');
 
-		function Woocommerce_Add_payping_Gateway($methods)
+		function Woocommerce_Add_payping_Gateway($methods) 
 		{
 			$methods[] = 'WC_PPal';
 			return $methods;
@@ -493,7 +479,6 @@ function Load_payping_Gateway()
 			}
 
 		}
-
 	}
 }
 add_action('plugins_loaded', 'Load_payping_Gateway', 0);

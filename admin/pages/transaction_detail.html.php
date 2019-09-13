@@ -57,4 +57,35 @@
             </tr>
         </table>
     </div>
+    <div class="inside">
+        <h1>تاریخچه وضعیت پرداخت</h1>
+        <table class="widefat fixed" style="border: 1px solid #c9c9c9; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #c9c9c9; text-align:center">IP</th>
+                <th style="border: 1px solid #c9c9c9; text-align:center">IP ایرانی است</th>
+                <th style="border: 1px solid #c9c9c9; text-align:center">مشخصات</th>
+                <th style="border: 1px solid #c9c9c9; text-align:center">تاریخ ایجاد</th>
+                <th style="border: 1px solid #c9c9c9; text-align:center">توضیحات</th>
+                <th style="border: 1px solid #c9c9c9; text-align:center">شناسه درخواست</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(empty($status_history)): ?>
+
+            <?php else: ?>
+                <?php foreach($status_history as $sh): ?>
+                    <tr>
+                        <td style="border: 1px solid #c9c9c9; text-align:center"><?=$sh->ip?></td>
+                        <td style="border: 1px solid #c9c9c9; text-align:center"><?=($sh->isIranIp)?'بله':'خیر'?></td>
+                        <td style="border: 1px solid #c9c9c9; text-align:center"><?=$sh->userAgent?></td>
+                        <td style="border: 1px solid #c9c9c9; text-align:center"><strong dir="ltr"><?= pp_jdate('Y-m-d H:i',strtotime($sh->createDate)) ?></strong></td>
+                        <td style="border: 1px solid #c9c9c9; text-align:center"><?=$sh->description?></td>
+                        <td style="border: 1px solid #c9c9c9; text-align:center"><?=strval($sh->requestId)?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+        </table>
+    </div>
 </div>

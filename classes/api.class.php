@@ -70,4 +70,14 @@ class pp_Api{
         $res = $this->call('post','withdraw/'.$amount);
         return new pp_Response($res);
     }
+
+    public function status_history($code){
+        $res = $this->call('get','report/timeline/'.$code);
+        return new pp_Response($res);
+    }
+
+    public function ipgs(){
+        $res = $this->call('get','pay/ipglist');
+        return new pp_Response($res);
+    }
 }

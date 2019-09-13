@@ -30,9 +30,9 @@ function toolbar_link_to_mypage( $wp_admin_bar ) {
     $price =0;
     if ( ! $price = wp_cache_get( 'balance', 'pp' ) ) {
         $api = new pp_Api();
-        $balance = $api->balance();
-        $price = $balance->body->result;
-        wp_cache_add( 'balance', $price, 'pp' ,60);
+        // $balance = $api->balance();
+        // $price = $balance->body->result;
+        // wp_cache_add( 'balance', $price, 'pp' ,60);
     }
 
     $title = 'موجودی پی پینگ: '.$price. ' تومان ';
