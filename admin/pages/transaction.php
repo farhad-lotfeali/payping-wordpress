@@ -1,9 +1,5 @@
 <?php
 function pp_admin_main(){
-    $api = new pp_Api();
-    pp_dump($api->ipgs());
-
-    
     if(isset($_GET['ac'])){
         $action = $_GET['ac'];
     }else{

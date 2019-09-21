@@ -2,6 +2,15 @@
 if (!defined('ABSPATH'))
 	exit;
 
+global $ipgs;
+$api = new pp_Api();
+$ipgs = $api->ipgs();
+if($ipgs->code != 500){
+	$ipgs = $ipgs->body;
+}else{
+	$ipgs = [];
+}
+
 function Load_payping_Gateway()
 {
 	if (class_exists('WC_Payment_Gateway') && !class_exists('WC_PPal') && !function_exists('Woocommerce_Add_payping_Gateway')) {
@@ -11,6 +20,10 @@ function Load_payping_Gateway()
 		function Woocommerce_Add_payping_Gateway($methods) 
 		{
 			$methods[] = 'WC_PPal';
+			global $ipgs;
+			foreach($ipgs as $ipg){
+				$methods[] = 'WC_'.$ipg->ipgName;
+			}
 			return $methods;
 		}
 
@@ -478,6 +491,17 @@ function Load_payping_Gateway()
 				}
 			}
 
+		}
+
+		
+		global $ipgs;
+		foreach($ipgs as $ipg){
+			
+			$source = file_get_contents(dirname(__FILE__).'/woocommerce_class.txt');
+			$search = ['{ipg}','{ipg_name}'];
+			$replace = [$ipg->ipgName,$ipg->title];
+			$source = str_replace($search,$replace,$source);
+			eval($source);
 		}
 	}
 }

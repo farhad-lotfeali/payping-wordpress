@@ -1,10 +1,14 @@
 <?php
 class pp_Response{
     public function __construct($res){
-        $this->code = $res['response']['code'];
-        $this->body = json_decode($res['body']);
+        if($res instanceof WP_Error){
+            $this->code = 500;
+            $this->body = $res->errors;
+        }else{
+            $this->code = $res['response']['code'];
+            $this->body = json_decode($res['body']);
+        }
     }
-
     public $code;
     public $body;
 }
@@ -23,7 +27,7 @@ class pp_Api{
 
     private function call($method,$path,$params=[]){
         $args = array(
-            'timeout' => 30,
+            'timeout' => 10,
             'headers' => array(
                 'Authorization' => 'Bearer ' . $this->token,
                 'Content-Type' => 'application/json'
@@ -77,6 +81,8 @@ class pp_Api{
     }
 
     public function ipgs(){
+        // $ipgs = $_SESSION['pp_ipgs'];
+        // if(!empty($ipgs)) return $ipgs;
         $res = $this->call('get','pay/ipglist');
         return new pp_Response($res);
     }

@@ -6,6 +6,7 @@ if (!function_exists('is_admin')) {
     exit();
 }
 
+if(!is_admin()) return;
 
 require_once(dirname(__FILE__).'/pages/transaction.php');
 require_once(dirname(__FILE__).'/pages/deposit.php');
