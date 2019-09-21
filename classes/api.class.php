@@ -3,10 +3,11 @@ class pp_Response{
     public function __construct($res){
         if($res instanceof WP_Error){
             $this->code = 500;
-            $this->body = $res->errors;
+            $this->body = [];
         }else{
             $this->code = $res['response']['code'];
             $this->body = json_decode($res['body']);
+            if(!isset($this->body)) $this->body = [];
         }
     }
     public $code;

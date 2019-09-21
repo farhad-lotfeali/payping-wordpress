@@ -63,7 +63,7 @@
 <script>
     jQuery(document).ready(function($) {
         $(".clickable-row").click(function() {
-            window.open($(this).data("href"));
+            window.location.href = $(this).data("href");
         });
     });
 

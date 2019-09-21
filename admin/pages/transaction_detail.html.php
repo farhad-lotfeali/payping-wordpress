@@ -72,7 +72,7 @@
         </thead>
         <tbody>
             <?php if(empty($status_history)): ?>
-
+                <tr><td colspan="6">تاریخچه ای موجود نیست</td></tr>
             <?php else: ?>
                 <?php foreach($status_history as $sh): ?>
                     <tr>
