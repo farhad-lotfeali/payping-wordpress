@@ -87,4 +87,16 @@ class pp_Api{
         $res = $this->call('get','pay/ipglist');
         return new pp_Response($res);
     }
+
+    public function store_list($offset = 0, $limit = 10)
+    {
+        $res = $this->call('get',"affiliate/store/list",['offset'=>$offset,'limit'=>$limit]);
+        return new pp_Response($res);
+    }
+
+    public function create_store($params)
+    {
+        $res= $this->call('post','affiliate/store',json_encode($params));
+        return new pp_Response($res);
+    }
 }
