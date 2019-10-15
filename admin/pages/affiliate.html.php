@@ -24,7 +24,7 @@
                 <td style="text-align:center;"><?= $af->isPrivate?'اختصاصی':'عمومی' ?></td>
                 <td style="text-align:center;"><?= $af->clientName ?></td>
                 <td style="text-align:center;"><a href="http://ppng.ir/aff/<?=$af->code?>">http://ppng.ir/aff/<?=$af->code?></a></td>
-                <td style="text-align:center;"><a href="<?=admin_url('admin.php?page=payping-affiliate&ac=create_distributor')?>">+ فروشنده اختصاصی...</a></td>
+                <td style="text-align:center;"><a href="<?=admin_url('admin.php?page=payping-affiliate&ac=create_distributor&store_code='.$af->code)?>">+ فروشنده اختصاصی...</a></td>
             </tr>
             <?php endforeach; ?>
 		</tbody>

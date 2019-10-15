@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline">تسویه حساب</h1>
+    <h1 class="wp-heading-inline">ساخت فروشگاه</h1>
     <?php do_action('admin_notices_pp'); ?>
     <form method="post" action="<?= admin_url('admin.php?page=payping-affiliate&ac=create_store') ?>">
         <div class="media-toolbar wp-filter" style="padding: 10px">
