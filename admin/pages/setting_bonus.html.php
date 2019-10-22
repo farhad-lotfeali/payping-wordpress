@@ -25,6 +25,13 @@
                             <?php if(isset($err_message->email)): ?><p class="description" id="tagline-description" style="color:red"><?=$err_message->email?></p><?php endif; ?>
                         </td>
                     </tr>
+                    <tr valign="top">
+                        <th scope="row">موبایل</th>
+                        <td>
+                            <input class="regular-text" type="text" name="mobile"  value=""/>
+                            <?php if(isset($err_message->mobile)): ?><p class="description" id="tagline-description" style="color:red"><?=$err_message->mobile?></p><?php endif; ?>
+                        </td>
+                    </tr>
                 
                 </table>
             
