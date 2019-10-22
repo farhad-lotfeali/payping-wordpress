@@ -99,4 +99,10 @@ class pp_Api{
         $res= $this->call('post','affiliate/store',json_encode($params));
         return new pp_Response($res);
     }
+
+    public function add_bonus($params)
+    {
+        $res= $this->call('post','service/AddBonus',json_encode($params));
+        return new pp_Response($res);
+    }
 }
