@@ -6,11 +6,11 @@
         <table class="form-table">
             <tr valign="top">
             <th scope="row">توکن پی پینگ</th>
-            <td><input class="regular-text" type="text" name="pp_token" value="<?php echo esc_attr( get_option('pp_token') ); ?>" /></td>
+            <td><input class="regular-text" type="text" name="pp_token" value="<?php echo esc_attr( get_option('pp_token') ); ?>" /><a class="button button-primary" href="https://ppng.ir/aff/gS4n" target="_blank">توکن</a></td>
             </tr>
             <tr>
-                <th>دریافت توکن</th>
-                <td><a class="button button-primary" href="https://ppng.ir/aff/gS4n" target="_blank">توکن</a></td>
+                <th>فعال کردن باشگاه مشتریان</th>
+                <td><a class="button button-primary" href="<?= admin_url('admin.php?page=payping-setting&ac=club&') ?>" target="_blank">✓</a></td>
             </tr>
         </table>
         <?php submit_button(); ?>
