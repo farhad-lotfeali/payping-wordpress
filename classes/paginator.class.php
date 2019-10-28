@@ -1,54 +1,53 @@
 <?php
-class Paginator {
-	var $items_per_page;
-	var $items_total;
-	var $current_page;
-	var $num_pages;
-	var $mid_range;
-	var $low;
-	var $high;
-	var $limit;
-	var $return;
-	var $do;
-	var $min;
-	function __constructor($current_page = 1,$mid_range = 7 , $items_per_page = 20) {
-		$this->current_page = $current_page;
-		$this->mid_range = $mid_range;
-		$this->items_per_page = $items_per_page;
-	}
 
-	function paginate() {
-		if (!is_numeric($this->items_per_page) OR $this->items_per_page <= 0)
-			$this->items_per_page = 20;
-		$this->num_pages = ceil($this->items_total / $this->items_per_page);
-		$this->current_page = (int)$_REQUEST['hpage'];
-		if ($this->current_page < 1 Or !is_numeric($this->current_page))
-			$this->current_page = 1;
-		if ($this->current_page > $this->num_pages)
-			$this->current_page = $this->num_pages;
-		$prev_page = $this->current_page - 1;
-		$next_page = $this->current_page + 1;
-		$this->low = ($this->current_page - 1) * $this->items_per_page;
-		$this->limit = ($_REQUEST['ipp'] == 'All') ? "" : " LIMIT $this->low,$this->items_per_page";
-		$this->min = (intval($this->num_pages) > 0) ? 1 : 0;
-		if ($this->low < 0)
-			$this->low = -1;
-	}
+class pp_pagination {
+	private $total = 0;
+	private $per_page = 50;
+	private $page = 0;
 
-	function set_high() {
-		global $wpdb;
-		$this->high = ($_REQUEST['ipp'] == 'All') ? $this->items_total : $this->low + $wpdb->num_rows;
-		if ($this->high < 0)
-			$this->high = 0;
-	}
+	public function __construct( $total, $per_page, $page ) {
+		$this->total    = $total;
+		$this->page     = $page;
+		$this->per_page = $per_page;
 
-	function show() {
-		if ($this->high == 0 || $this->high == 1)
-			echo "نمایش {$this->high} مورد";
-		else {
-			$low = $this->low + 1;
-			echo "نمایش {$low} تا {$this->high} از {$this->items_total} مورد";
+		if($per_page == 0){
+		    $this->per_page = 50;
+        }
+
+		if ( $page <= 0 ) {
+			$this->page = 1;
+		}
+		if ( $page > ceil( $total / $per_page ) ) {
+			$this->page = ceil( $total / $per_page );
 		}
 	}
 
+	// determine what the current page is also, it returns the current page
+	public function show() {
+		$pageCount = ceil( $this->total / $this->per_page );
+		$prev      = $this->page - 1;
+		$next      = $this->page + 1;
+
+		?>
+
+        <div class="tablenav-pages">
+            <span class="pagination-links">
+               <a class="button prev-page" href="<?=$_SERVER['REQUEST_URI'] ?>&p=<?=$prev?>">
+                   <span class="screen-reader-text">برگه قبل</span>
+                   <span aria-hidden="true">‹</span>
+               </a>
+
+                <span id="table-paging" class="paging-input">
+                    <span class="tablenav-paging-text"><?= $this->page ?> از <span
+                                class="total-pages"><?= $pageCount ?></span></span>
+                </span>
+                <a class="button next-page" href="<?=$_SERVER['REQUEST_URI'] ?>&p=<?= $next ?>">
+                        <span class="screen-reader-text">برگه بعد</span>
+                        <span aria-hidden="true">›</span>
+                </a>
+            </span>
+        </div>
+
+		<?php
+	}
 }

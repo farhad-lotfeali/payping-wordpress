@@ -35,7 +35,7 @@
             <?php else: ?>
             <?php foreach($res->body as $item): ?>
                 <tr class='clickable-row' data-href='<?= admin_url('admin.php?page=payping&ac=detail&code='.$item->code) ?>'>
-                    <td style="text-align:center"><strong dir="ltr"><?= pp_jdate('Y-m-d H:i',strtotime($item->payDate)) ?></strong></td>
+                    <td style="text-align:center"><strong dir="ltr"><?php if(!empty($item->payDate)): ?><?= pp_jdate('Y-m-d H:i',strtotime($item->payDate)) ?><?php else: echo "";  endif; ?></strong></td>
                     <td style="text-align:center"><span><?= $item->code ?></span></td>
                     <td style="text-align:center"><span><?= empty($item->name)?'-':$item->name ?></span></td>
                     <td style="text-align:center"><?= boolval($item->isPaid)?'<span style="color:green">پرداخت شده</span>':'<span style="color:red">پرداخت نشده</span>' ?></td>
@@ -55,7 +55,7 @@
 			</tr>
 		</tfoot>
 	</table>
-
+    <?php $paginator->show(); ?>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="<?= plugins_url() . '/payping/assets/js/persian-date.js' ?>"></script>

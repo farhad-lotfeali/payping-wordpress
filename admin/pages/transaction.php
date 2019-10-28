@@ -19,9 +19,15 @@ function pp_admin_main(){
 
 function pp_transaction_list()
 {
+
+    $page = $_GET['p'] ?? 1;
+    if($page < 1) $page = 1;
+
+    $per_page = $_GET['per_page'] ?? 20;
+
     $filters = [
-        'offset' => 0,
-        'limit' => 20
+        'offset' => $per_page * ($page-1),
+        'limit' => $per_page
     ];
 
     if(isset($_GET['from']) && !empty($_GET['from'])){
@@ -44,6 +50,8 @@ function pp_transaction_list()
 
     $api = new pp_Api();
     $res = $api->transactions($filters);
+    $resCount = $api->transactionsCount($filters);
+    $paginator = new pp_pagination($resCount->body->result,$per_page,$page);
     require dirname(__FILE__). '/transaction.html.php';
 }
 
