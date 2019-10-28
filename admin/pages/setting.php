@@ -13,7 +13,7 @@ function pp_admin_setting(){
         $action = '';
     }
     switch($action){
-        case 'bonus':
+        case 'club':
             pp_admin_setting_bonus();
             break;
         default:

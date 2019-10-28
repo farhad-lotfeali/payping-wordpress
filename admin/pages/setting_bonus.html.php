@@ -1,7 +1,7 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">ساخت فروشگاه</h1>
     <?php do_action('admin_notices_pp'); ?>
-    <form method="post" action="<?= admin_url('admin.php?page=payping-affiliate&ac=create_store') ?>">
+    <form method="post" action="<?= admin_url('admin.php?page=payping-setting&ac=club&') ?>">
         <div class="media-toolbar wp-filter" style="padding: 10px">
                 <table class="form-table">
                     <tr valign="top">
