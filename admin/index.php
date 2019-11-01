@@ -12,6 +12,7 @@ require_once(dirname(__FILE__).'/pages/transaction.php');
 require_once(dirname(__FILE__).'/pages/deposit.php');
 require_once(dirname(__FILE__).'/pages/affiliate.php');
 require_once(dirname(__FILE__).'/pages/setting.php');
+require_once(dirname(__FILE__).'/pages/club.php');
 
 
 
@@ -22,6 +23,7 @@ function pp_admin_menu(){
     add_submenu_page('payping', 'تراکنش ها', 'تراکنش ها', 'manage_options', 'payping', 'pp_admin_main');
     add_submenu_page('payping', 'مغایرت گیری', 'مغایرت گیری', 'manage_options', 'payping-deposite', 'pp_admin_deposit');
     add_submenu_page('payping', 'همکاری در فروش', 'همکاری در فروش', 'manage_options', 'payping-affiliate', 'pp_admin_affiliate');
+    add_submenu_page('payping', 'باشگاه مشتریان', 'باشگاه مشتریان', 'manage_options', 'payping-club', 'pp_admin_club');
     add_submenu_page('payping', 'تنظیمات', 'تنظیمات', 'manage_options', 'payping-setting', 'pp_admin_setting');
 }
 
@@ -33,9 +35,9 @@ function toolbar_link_to_mypage( $wp_admin_bar ) {
     $price =0;
     if ( ! $price = wp_cache_get( 'balance', 'pp' ) ) {
         $api = new pp_Api();
-        // $balance = $api->balance();
-        // $price = $balance->body->result;
-        // wp_cache_add( 'balance', $price, 'pp' ,60);
+        $balance = $api->balance();
+        $price = $balance->body->result;
+        wp_cache_add( 'balance', $price, 'pp' ,60);
     }
 
     $title = 'موجودی پی پینگ: '.$price. ' تومان ';

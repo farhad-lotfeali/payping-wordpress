@@ -42,6 +42,11 @@ class pp_Api{
                 $args['body'] = $params;
                 $result = wp_remote_post($this->base_url.$path,$args);
             break;
+            case 'delete':
+                $args['body'] = $params;
+                $args['method'] = 'DELETE';
+                $result = wp_remote_request($this->base_url.$path,$args);
+            break;
         }
         return $result;
     }
@@ -94,15 +99,33 @@ class pp_Api{
         return new pp_Response($res);
     }
 
+    public function store($code)
+    {
+        $res = $this->call('get',"affiliate/store/".$code);
+        return new pp_Response($res);
+    }
+
+    public function store_destributor($code,$offset=0,$limit=10)
+    {
+        $res = $this->call('get',"affiliate/distributor/storelist",["storeCode"=>$code,'offset'=>$offset,'limit'=>$limit]);
+        return new pp_Response($res);
+    }
+
     public function create_store($params)
     {
         $res= $this->call('post','affiliate/store',json_encode($params));
         return new pp_Response($res);
     }
 
-    public function add_bonus($params)
+    public function add_bonus()
     {
-        $res= $this->call('post','service/AddBonus',json_encode($params));
+        $res= $this->call('post','service/AddBonus',[]);
+        return new pp_Response($res);
+    }
+
+    public function remove_bonus()
+    {
+        $res= $this->call('delete','service/RemoveBonus',[]);
         return new pp_Response($res);
     }
 }
